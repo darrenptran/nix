@@ -155,6 +155,8 @@
       league-spartan
       plank
       nextcloud-client
+      xorg.xrandr
+      libreoffice-qt
   ];
 
   # excluded packages
