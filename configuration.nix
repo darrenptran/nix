@@ -9,9 +9,13 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.system-features = [ "gccarch-znver3" ];
 
-#  boot.loader.systemd-boot.enable = true;
-  # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
+  virtualisation.vmware.host.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.virtualbox.guest.x11 = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -157,6 +161,10 @@
       nextcloud-client
       xorg.xrandr
       libreoffice-qt
+      zoom-us
+      discord
+      zim
+      pantheon.elementary-dock      
   ];
 
   # excluded packages
@@ -170,4 +178,5 @@
   ];
 
   system.stateVersion = "23.11";
+
 }
