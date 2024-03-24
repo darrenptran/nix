@@ -7,7 +7,7 @@ imports =
 ];
 
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
-nix.settings.system-features = [ "gccarch-znver3" ];
+
 
 virtualisation.virtualbox.host.enable = true;
 virtualisation.virtualbox.host.enableExtensionPack = true;
@@ -133,17 +133,6 @@ google-chrome
 spotify
 joplin-desktop
 vscode-with-extensions
-libsForQt5.dolphin
-libsForQt5.ffmpegthumbs
-libsForQt5.ark
-libsForQt5.kcalc
-libsForQt5.spectacle
-libsForQt5.okular
-libsForQt5.yakuake
-libsForQt5.sddm-kcm
-libsForQt5.sddm
-featherpad
-openshot-qt
 ccache
 preload
 haveged
@@ -153,7 +142,6 @@ vlc
 fzf
 autojump
 cups
-freshfetch
 zsh
 sudo
 nano
@@ -173,19 +161,13 @@ league-spartan
 plank
 nextcloud-client
 xorg.xrandr
-libreoffice-qt
+libreoffice
 zoom-us
 discord
 zim
 hplip
 krita
 media-downloader
-];
-
-# excluded packages
-environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-gwenview
-elisa
 ];
 
 services.xserver.excludePackages = with pkgs; [
