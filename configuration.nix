@@ -60,8 +60,8 @@ LC_TIME = "en_US.UTF-8";
 
 services.flatpak.enable = true;
 services.xserver.enable = true;
-services.xserver.displayManager.sddm.enable = true;
-services.xserver.desktopManager.plasma5.enable = true;
+services.xserver.displayManager.lightdm.enable = true;
+services.xserver.desktopManager.pantheon.enable = true;
 services.xserver = {
 layout = "us";
 xkbVariant = "";
@@ -123,8 +123,10 @@ wolfangaukang.vdhcoapp
 };
 
 environment.systemPackages = with pkgs; [
-amd-libflame
-microcodeAmd
+microcodeIntel
+iucode-tool
+xf86-video-intel
+intel-hybrid-driver
 firefox
 thunderbird
 google-chrome
