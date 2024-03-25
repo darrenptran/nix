@@ -126,7 +126,6 @@ environment.systemPackages = with pkgs; [
 microcodeIntel
 iucode-tool
 xf86-video-intel
-intel-hybrid-driver
 firefox
 thunderbird
 google-chrome
