@@ -1,10 +1,20 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
 { config, pkgs, lib, ... }:
 
 {
-imports =
-[
-./hardware-configuration.nix
-];
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.autoLogin.enable = true;
+  services.xserver.displayManager.autoLogin.user = "darren";
+  services.xserver.displayManager.startx.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -35,10 +45,11 @@ networking.hostName = "nixos";
 networking.networkmanager.enable = true;
 networking.firewall = {
 enable = true;
-allowedTCPPorts = [ 80 443 ];
+allowedTCPPorts = [ 80 443 9100 ];
 allowedUDPPortRanges = [
 { from = 4000; to = 4007; }
 { from = 8000; to = 8010; }
+{ from = 1714; to = 1764; }
 ];
 };
 
@@ -60,8 +71,6 @@ LC_TIME = "en_US.UTF-8";
 
 services.flatpak.enable = true;
 services.xserver.enable = true;
-services.xserver.displayManager.lightdm.enable = true;
-services.xserver.desktopManager.pantheon.enable = true;
 services.xserver = {
 layout = "us";
 xkbVariant = "";
@@ -83,6 +92,7 @@ pulse.enable = true;
 jack.enable = true;
 };
 programs.dconf.enable = true;
+programs.kdeconnect.enable = true;
 programs.mtr.enable = true;
 programs.gnupg.agent = {
 enable = true;
@@ -100,13 +110,7 @@ histSize = 0;
 };
 users.defaultUserShell = pkgs.zsh;
 
-# packages
 nixpkgs.config.allowUnfree = true;
-nixpkgs.config.packageOverrides = pkgs: {
-nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-inherit pkgs;
-};
-};
 nixpkgs.config.permittedInsecurePackages = [
 "electron-19.1.9"
 "imagemagick-6.9.12-68"
@@ -116,16 +120,10 @@ users.users.darren = {
 isNormalUser = true;
 description = "Darren Tran";
 extraGroups = [ "networkmanager" "wheel" ];
-packages = with pkgs.nur.repos; [
-vanilla.fastfetch
-wolfangaukang.vdhcoapp
-];
 };
 
 environment.systemPackages = with pkgs; [
-microcodeIntel
-iucode-tool
-xf86-video-intel
+fastfetch
 firefox
 thunderbird
 google-chrome
@@ -157,7 +155,6 @@ xfsdump
 etcher
 intel-one-mono
 league-spartan
-plank
 nextcloud-client
 xorg.xrandr
 libreoffice
@@ -165,14 +162,30 @@ zoom-us
 discord
 zim
 hplip
-krita
 media-downloader
+slack
+teams-for-linux
+plank
+yakuake
+kdeconnect
+libsForQt5.kcalc
+libsForQt5.kate
+];
+
+environment.plasma5.excludePackages = [ 
+pkgs.libsForQt5.gwenview
+pkgs.libsForQt5.elisa
 ];
 
 services.xserver.excludePackages = with pkgs; [
 xterm
 ];
-
-system.stateVersion = "23.11";
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "23.11"; # Did you read the comment?
 
 }
