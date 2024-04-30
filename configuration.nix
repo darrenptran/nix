@@ -9,16 +9,23 @@ imports =
 # Bootloader.
 #  boot.loader.systemd-boot.enable = true;
 #  boot.loader.efi.canTouchEfiVariables = true;
-boot.loader = {
-efi = {
-canTouchEfiVariables = true;
-efiSysMountPoint = "/boot/efi";
-};
-grub = {
-efiSupport = true;
-device = "nodev";
-};
-};
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
+    grub = {
+      efiSupport = true;
+      device = "nodev";
+    };
+  };
+
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  nixpkgs.localSystem = {
+    gcc.arch = "znver3";
+    gcc.tune = "znver3";
+    system = "x86_64-linux";
+  };
 
 networking.hostName = "nixos"; # Define your hostname.
 networking.networkmanager.enable = true;
