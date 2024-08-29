@@ -41,6 +41,8 @@ alias list="sudo pacman -Qe"
 alias find="sudo pacman -Q"
 alias makepkg="makepkg --si --noconfirm"
 alias install="sudo pacman -U "
+alias clean="sudo pacman -Sc ; sudo pacman -Rns  '$(pacman -Qtdq)'"
+
 
 fastfetch
 setopt nonomatch
