@@ -144,6 +144,10 @@
     curl
     wget
     gtk3
+    gnome-extension-manager
+    gnome-tweaks
+    zoom-us
+    teams-for-linux
     python2
     python314
     vscode
