@@ -157,6 +157,10 @@
     # Nix tools
     nix-du #https://github.com/symphorien/nix-du
     common-updater-scripts
+    # fonts
+    garamond-libre
+    league-spartan
+    fira
    ];
 
   environment.gnome.excludePackages = with pkgs; [
