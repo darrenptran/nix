@@ -159,15 +159,26 @@
     common-updater-scripts
    ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  
-  # List services that you want to enable:
+  environment.gnome.excludePackages = with pkgs; [
+    eog
+    gnome-tour
+    geary
+    cheese
+    totem
+    gnome-maps
+    gnome-logs
+    gnome-clocks
+    gnome-contacts
+    gnome-characters
+    gnome-console
+    gnome-music
+    epiphany
+    xterm
+  ];
 
-  # Enable the OpenSSH daemon.
+  programs.gnupg.agent = {
+    enable = true;
+  
   services.openssh.enable = true;
 
   # Open ports in the firewall.
