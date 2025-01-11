@@ -146,6 +146,7 @@
     gtk3
     gnome-extension-manager
     gnome-tweaks
+    gnome-menus
     zoom-us
     teams-for-linux
     python2
@@ -161,6 +162,10 @@
     garamond-libre
     league-spartan
     fira
+    # appimage support
+    fuse
+    fuse3
+    fuse-ext2
    ];
 
   environment.gnome.excludePackages = with pkgs; [
